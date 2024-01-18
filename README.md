@@ -1,8 +1,17 @@
-# Welcome to Loco :train:
+# Welcome to Loco-mystore :train:
 
-Loco is a web and API framework running on Rust.
+This is a proof of concept example of how I've made Loco do server-side content generation so that I can run both web and API framework on Rust, without the need for client-side generation tools like React.
 
-This is the **Rest API starter** which includes a `User` model and authentication based on JWT.
+At a high level, I've reorganized the `controllers` namespace, putting the API controllers into their own `controllers::api` namespace for readability and to prevent collisions with the frontend, i.e., `/users` versus `/api/users`.
+
+- Create a new Index controller to handle requests to `/`
+- Move API routes to controllers/api
+- Create controllers/api/mod.rs
+- Update controllers/mod.rs to remove API routes and add `pub mod api`
+- Remove `prefix` from routes in controllers/index.rs
+- Prepend `/api/` to `prefix` in routes in controllers/api
+
+This is a barebones example. I am also implementing templating via [Askama](https://github.com/djc/askama) and may use [htmx](https://htmx.org/) as a lightweight library to build a modern interface with SSR content.
 
 ## Quick Start
 
